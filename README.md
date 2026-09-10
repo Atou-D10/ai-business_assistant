@@ -684,3 +684,46 @@ Ce niveau de détail illustre l'intérêt de fournir un contexte métier
 précis (plusieurs capteurs/bâtiments) et un échantillon réel : le LLM 
 adapte ses recommandations à la structure effective des données plutôt 
 que de donner des conseils de nettoyage génériques.
+
+
+### 6.2 Visualisations pertinentes
+
+**Prompt :**
+Rôle : Tu es un data analyst expérimenté.
+
+Contexte : Dataset de capteurs IoT (605 lignes), colonnes : id_mesure, 
+date_heure, id_capteur, batiment, temperature, humidite, pression, 
+consommation, etat.
+
+Voici un échantillon réel des données (5 lignes) :
+id_mesure | date_heure          | id_capteur | batiment | temperature | humidite | pression | consommation | etat
+M0413     | 2026-01-22 04:00:00 | C005       | B002     | 25.46       | 58.06    | 1008.95  | 287.28       | OK
+M0290     | 2026-01-17 01:00:00 | C002       | B001     | 24.00       | 79.73    | 993.39   | 116.20       | OK
+M0077     | 2026-01-08 04:00:00 | C005       | B002     | 25.82       | 54.47    | 1010.32  | 288.50       | OK
+M0079     | 2026-01-08 06:00:00 | C007       | B003     | 28.23       | 69.39    | 1019.62  | 136.65       | OK
+M0183     | 2026-01-12 14:00:00 | C003       | B001     | 20.58       | 53.80    | 1016.58  | 182.62       | OK
+
+Tâche : Propose les visualisations les plus pertinentes pour comprendre 
+la consommation énergétique d'un bâtiment.
+
+Format de sortie : pour chaque visualisation proposée, indique : le type 
+de graphique, les variables utilisées, l'objectif, l'interprétation attendue.
+
+**Réponse obtenue :**
+
+![Réponse visualisations 1](images/p6_visualisation_1.png)
+![Réponse visualisations 2](images/p6_visualisation_2.png)
+
+**Analyse :**
+
+Le LLM propose 7 visualisations complémentaires plutôt qu'une seule, 
+couvrant différents angles d'analyse : évolution temporelle, comparaison 
+inter-bâtiments, profil horaire, distribution/outliers, corrélation avec 
+la température, granularité par capteur, et fiabilité des données 
+(via `etat`). Point notable : le LLM exploite l'échantillon fourni pour 
+émettre une observation concrète ("B002 probablement le plus énergivore 
+vu l'échantillon, ~287 vs ~116-180"), illustrant l'intérêt de fournir des 
+données réelles plutôt qu'une description abstraite des colonnes. La 
+dernière visualisation (répartition des états par bâtiment) est une 
+proposition pertinente non demandée explicitement, mais utile pour 
+qualifier la fiabilité des données avant toute analyse de consommation.
