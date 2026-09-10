@@ -472,3 +472,40 @@ Le résumé respecte toutes les contraintes : structure claire en 4 sections
 inventée, longueur bien inférieure à la limite de 250 mots. Le LLM a même 
 ajouté une section "Actions mises en œuvre" non explicitement demandée 
 mais pertinente pour la clarté du résumé.
+
+
+### 5.2 Traduction
+
+**Prompt :**
+Rôle : Tu es un traducteur professionnel spécialisé dans les documents 
+d'entreprise.
+
+Tâche : Traduis le texte suivant du français vers l'anglais.
+
+Texte à traduire :
+"""
+La nouvelle version de notre plateforme intègre un système de 
+recommandation basé sur l'intelligence artificielle. Ce système analyse 
+le comportement de navigation de l'utilisateur en temps réel afin de lui 
+proposer des produits pertinents. Les tests internes montrent une 
+augmentation de 18% du taux de clic sur les recommandations par rapport 
+à l'ancienne version basée sur des règles statiques.
+"""
+
+Contraintes :
+- Conserver le sens exact du texte d'origine
+- Conserver la structure du texte (même nombre de phrases/paragraphes)
+- Conserver les termes techniques (ex : "taux de clic", "recommandation") 
+  avec leur équivalent anglais standard
+- Ne pas résumer le texte
+- Ne rajouter aucune information absente du texte d'origine
+
+**Réponse obtenue :**
+
+![Réponse traduction](images/p5_traduction.png)
+
+La traduction respecte les contraintes : même nombre de phrases (3), sens 
+identique, aucune information ajoutée ou omise. Le terme technique "taux 
+de clic" est traduit par son équivalent anglais standard "click-through 
+rate", plutôt qu'une traduction littérale, ce qui montre une bonne 
+maîtrise terminologique plutôt qu'une traduction mot à mot.
