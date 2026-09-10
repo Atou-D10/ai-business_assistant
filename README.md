@@ -1001,3 +1001,31 @@ contrainte n'ayant été donnée (longueur, format, angle), le résultat dépend
 entièrement du jugement implicite du LLM sur ce qui est "important" à 
 garder — un autre essai du même prompt pourrait produire une longueur ou 
 une structure différente, sans garantie de reproductibilité.
+
+
+
+### 8.2 Prompt B — Résumé avec contrainte de longueur (150 mots)
+
+**Prompt :**
+Résume ce texte en 150 mots.
+
+Texte :
+"""
+[texte source]
+"""
+
+**Réponse obtenue :**
+
+![Réponse prompt B résumé](images/p8_promptB.png)
+
+**Analyse :**
+
+Le texte source étant déjà court (~110 mots), la limite de 150 mots ne 
+constitue pas une contrainte réellement restrictive : plutôt que de 
+condenser davantage, le LLM développe légèrement plus que le Prompt A 
+(ajout d'une phrase de conclusion sur les perspectives d'amélioration 
+futures). Ce résultat illustre un point méthodologique important : une 
+contrainte de longueur n'a d'effet visible sur le comportement du LLM que 
+si elle est plus stricte que la longueur "naturelle" de sa réponse non 
+contrainte ; ici, elle laisse au contraire de la marge, ce qui n'oblige à 
+aucun arbitrage sur le contenu à garder.
