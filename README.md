@@ -621,3 +621,66 @@ une contrainte explicite ("ne pas inventer"), le modèle peut légèrement
 s'en écarter pour produire un texte plus fluide, ce qui souligne 
 l'importance de toujours relire une sortie générée avant utilisation, 
 même lorsque le prompt est bien construit.
+
+
+## Partie 6 — Prompt Engineering pour le Machine Learning
+
+### 6.1 Stratégies de traitement des données
+
+**Prompt :**
+Rôle : Tu es un data scientist expérimenté.
+
+Contexte : Dataset de capteurs IoT installés dans plusieurs bâtiments, 
+605 lignes, colonnes : id_mesure, date_heure, id_capteur, batiment, 
+temperature (float), humidite (float), pression (float), 
+consommation (float), etat (catégorielle).
+
+Voici un échantillon réel des données (5 lignes) :
+id_mesure | date_heure          | id_capteur | batiment | temperature | humidite | pression | consommation | etat
+M0413     | 2026-01-22 04:00:00 | C005       | B002     | 25.46       | 58.06    | 1008.95  | 287.28       | OK
+M0290     | 2026-01-17 01:00:00 | C002       | B001     | 24.00       | 79.73    | 993.39   | 116.20       | OK
+M0077     | 2026-01-08 04:00:00 | C005       | B002     | 25.82       | 54.47    | 1010.32  | 288.50       | OK
+M0079     | 2026-01-08 06:00:00 | C007       | B003     | 28.23       | 69.39    | 1019.62  | 136.65       | OK
+M0183     | 2026-01-12 14:00:00 | C003       | B001     | 20.58       | 53.80    | 1016.58  | 182.62       | OK
+
+Tâche : Pour ce dataset, propose une stratégie complète concernant :
+1. Les valeurs manquantes (comment les détecter, comment les traiter, 
+   quels risques associés à chaque méthode)
+2. Les doublons (comment les détecter, comment les traiter — attention, 
+   plusieurs capteurs différents peuvent mesurer à la même date_heure, 
+   ce n'est pas forcément un doublon)
+3. Les valeurs aberrantes / outliers (comment les détecter, comment les 
+   traiter, quels risques associés)
+4. Les variables catégorielles/identifiants (comment traiter id_capteur, 
+   batiment et etat pour un futur modèle ML)
+
+Format de sortie : une section par point (1 à 4), avec pour chacune : 
+méthode de détection, méthode de traitement recommandée, risques associés.
+
+**Réponse obtenue :**
+
+![Réponse nettoyage 1](images/p6_nettoyage_1.png)
+![Réponse nettoyage 2](images/p6_nettoyage_2.png)
+![Réponse nettoyage 3](images/p6_nettoyage_3.png)
+
+**Analyse :**
+
+Réponse remarquablement adaptée au contexte réel du dataset, plutôt qu'une 
+réponse générique de nettoyage de données :
+- Détection des doublons fonctionnels sur `id_capteur` + `date_heure` 
+  (et non `date_heure` seule), en tenant compte du fait que plusieurs 
+  capteurs mesurent légitimement au même horodatage — exactement la 
+  précision demandée dans le prompt
+- Recommandation d'interpolation par capteur plutôt que par moyenne 
+  globale, pour respecter les régimes physiques différents entre 
+  bâtiments/capteurs
+- Distinction entre outlier "erreur capteur" (hors bornes physiques) et 
+  outlier "signal métier" (pic de consommation réel à ne pas supprimer 
+  si l'objectif est la détection d'anomalies)
+- Mise en garde sur le risque de fuite de données (data leakage) si 
+  `id_capteur` est encodé par target encoding sans validation croisée
+
+Ce niveau de détail illustre l'intérêt de fournir un contexte métier 
+précis (plusieurs capteurs/bâtiments) et un échantillon réel : le LLM 
+adapte ses recommandations à la structure effective des données plutôt 
+que de donner des conseils de nettoyage génériques.
