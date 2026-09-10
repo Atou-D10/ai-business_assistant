@@ -509,3 +509,33 @@ identique, aucune information ajoutée ou omise. Le terme technique "taux
 de clic" est traduit par son équivalent anglais standard "click-through 
 rate", plutôt qu'une traduction littérale, ce qui montre une bonne 
 maîtrise terminologique plutôt qu'une traduction mot à mot.
+
+
+### 5.3 Classification de ticket informatique
+
+**Prompt :**
+Rôle : Tu es un système de tri automatique de tickets informatiques.
+
+Tâche : Classe le ticket suivant dans une catégorie parmi : réseau, 
+logiciel, matériel, sécurité, accès, autre.
+
+Ticket : "Impossible de me connecter à mon compte depuis ce matin, le 
+mot de passe est refusé alors que je suis sûr qu'il est correct. J'ai 
+aussi reçu un email disant qu'une tentative de connexion inhabituelle 
+a été détectée depuis un autre pays."
+
+Format de sortie : JSON avec les champs suivants uniquement :
+- categorie : chaîne de caractères (une valeur parmi la liste donnée)
+- justification : chaîne de caractères expliquant brièvement le choix
+
+Contraintes : Retourne uniquement le JSON, sans texte avant ou après.
+
+**Réponse obtenue :**
+
+![Réponse ticket](images/p5_ticket.png)
+
+Le LLM classe le ticket en "sécurité" plutôt qu'en "accès", en identifiant 
+correctement que la combinaison "mot de passe refusé + alerte de connexion 
+inhabituelle" évoque une possible compromission du compte, et non un simple 
+problème d'accès classique. JSON valide, respectant strictement les 2 
+champs demandés.
