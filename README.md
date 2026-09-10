@@ -805,3 +805,45 @@ aux faux positifs/négatifs. Point notable : le LLM va au-delà de la
 demande en mentionnant la PR-AUC comme alternative préférable au ROC-AUC 
 en cas de déséquilibre extrême des classes — une nuance technique 
 pertinente mais non explicitement demandée.
+
+
+### 6.5 Métriques de régression
+
+**Prompt :**
+Rôle : Tu es un expert en machine learning, pédagogue.
+
+Tâche : Explique les métriques de régression suivantes : MAE, MSE, RMSE.
+
+Pour chacune, indique :
+- La définition
+- Comment l'interpréter
+- Un exemple concret
+- Dans quel contexte elle est particulièrement utile
+
+**Réponse obtenue :**
+
+![Réponse métriques régression 1](images/p6_metriques_regression_1.png)
+![Réponse métriques régression 2](images/p6_metriques_regression_2.png)
+![Réponse métriques régression 3](images/p6_metriques_regression_3.png)
+
+**Analyse :**
+
+Réponse pédagogique et cohérente : le LLM réutilise le même exemple 
+numérique (3 prédictions de prix d'appartements) pour illustrer 
+successivement MAE, MSE et RMSE, ce qui permet de visualiser concrètement 
+comment chaque métrique traite les mêmes écarts différemment (MSE = 175 
+k€² difficilement interprétable, RMSE = 13,2 k€ directement lisible). 
+Point notable : la règle pratique finale ("si RMSE >> MAE, il y a 
+probablement des outliers") est une information actionnable qui dépasse 
+la simple définition, utile pour diagnostiquer un modèle en pratique — 
+en cohérence avec les outliers déjà identifiés dans le dataset capteurs 
+en tâche 6.1.
+
+### Bilan de la Partie 6
+
+Les 5 tâches confirment que fournir un contexte métier précis et un 
+échantillon réel (tâches 6.1 à 6.3) permet d'obtenir des recommandations 
+concrètement adaptées à la structure du dataset (doublons fonctionnels, 
+choix de modèle selon la taille des données), tandis que les demandes 
+purement pédagogiques (6.4, 6.5) n'ont pas besoin de ce contexte pour 
+produire des explications claires et bien illustrées.
