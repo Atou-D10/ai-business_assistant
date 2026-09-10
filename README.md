@@ -308,3 +308,38 @@ l'action de l'entreprise (remboursement 20%). Point notable : concernant
 la "cause probable" demandée, il précise honnêtement que l'avis ne 
 mentionne aucune cause, plutôt que d'en inventer une — bon respect de la 
 contrainte de ne pas ajouter d'information non présente dans le texte.
+
+
+**Prompt 2 — Vérification (self-check) :**
+Vérifie ta réponse précédente en répondant précisément aux points suivants :
+
+1. Contiens-tu des informations non justifiées par l'avis client d'origine ?
+2. Y a-t-il des contradictions dans ta réponse ?
+3. As-tu omis des informations importantes présentes dans l'avis ?
+4. As-tu halluciné une information qui n'était pas dans le texte d'origine ?
+5. As-tu bien respecté la contrainte de ne pas ajouter d'information non mentionnée ?
+
+Réponds point par point, en citant précisément ce qui pose problème s'il y en a.
+
+**Réponse obtenue :**
+
+![Réponse self-check étape 2](images/p3_selfcheck_etape2.png)
+
+Le self-check révèle deux imperfections réelles dans la réponse initiale :
+- une **extrapolation non justifiée** : "après une semaine" transformé en 
+  "après une semaine d'utilisation", alors que l'avis ne précise pas s'il 
+  s'agit d'usage effectif
+- une **omission factuelle** : le fait que le produit "fonctionnait bien" 
+  à la réception n'a pas été repris, rendant le résumé plus négatif que 
+  l'avis d'origine
+
+Le LLM ne détecte en revanche aucune contradiction interne ni hallucination 
+franche, et corrige lui-même son résumé initial en conséquence.
+
+### Bilan du self-check (3.2)
+
+Cette technique permet de détecter des micro-distorsions qu'un simple 
+relecture pourrait manquer (l'ajout du mot "d'utilisation" est subtil mais 
+change le sens). Le second prompt agit comme un filtre de qualité qui 
+améliore la fiabilité de la réponse finale, sans intervention humaine 
+entre les deux étapes.
