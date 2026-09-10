@@ -429,3 +429,46 @@ garantit une sortie exploitable sans post-traitement supplémentaire.
 Structurer la sortie en JSON, avec des règles de validation explicites 
 dans le prompt, transforme une réponse en texte libre difficilement 
 exploitable en une donnée directement utilisable par une application
+
+
+## Partie 5 — Prompts pour les applications métier
+
+### 5.1 Résumé de document
+
+**Prompt :**
+Rôle : Tu es un assistant de synthèse documentaire.
+
+Contexte : Voici un rapport d'activité trimestriel à résumer :
+"""
+Au cours du dernier trimestre, l'équipe marketing avait pour objectif 
+d'augmenter le trafic du site web de 15% et d'améliorer le taux de 
+conversion des visiteurs en clients. Pour cela, une nouvelle campagne 
+publicitaire a été lancée sur les réseaux sociaux, accompagnée d'une 
+refonte de la page d'accueil du site. Les résultats montrent une hausse 
+du trafic de 22%, dépassant l'objectif initial, mais le taux de conversion 
+n'a progressé que de 2%, en dessous des attentes fixées à 5%. L'analyse 
+des données suggère que le nouveau trafic provient majoritairement de 
+visiteurs peu qualifiés, attirés par la campagne publicitaire mais peu 
+intéressés par un achat immédiat. L'équipe recommande de mieux cibler 
+les publicités sur des audiences à plus forte intention d'achat, et de 
+simplifier le tunnel de paiement pour réduire l'abandon de panier lors 
+du prochain trimestre.
+"""
+
+Tâche : Résume ce rapport.
+
+Contraintes : 
+- Maximum 250 mots
+- Conserver uniquement les informations factuelles présentes dans le texte
+- Identifier clairement : les objectifs, les résultats obtenus, les recommandations
+- N'inventer aucune information non présente dans le texte
+
+**Réponse obtenue :**
+
+![Réponse résumé](images/p5_resume.png)
+
+Le résumé respecte toutes les contraintes : structure claire en 4 sections 
+(objectifs, actions, résultats, recommandations), aucune information 
+inventée, longueur bien inférieure à la limite de 250 mots. Le LLM a même 
+ajouté une section "Actions mises en œuvre" non explicitement demandée 
+mais pertinente pour la clarté du résumé.
