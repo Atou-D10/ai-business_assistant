@@ -1029,3 +1029,56 @@ contrainte de longueur n'a d'effet visible sur le comportement du LLM que
 si elle est plus stricte que la longueur "naturelle" de sa réponse non 
 contrainte ; ici, elle laisse au contraire de la marge, ce qui n'oblige à 
 aucun arbitrage sur le contenu à garder.
+
+
+### 8.3 Prompt C — Résumé avec prompt structuré complet
+
+**Prompt :**
+Rôle : Tu es un rédacteur technique spécialisé dans la synthèse de rapports 
+de projet.
+
+Tâche : Résume le texte suivant.
+
+Texte :
+"""
+[texte source]
+"""
+
+Contraintes : 
+- Maximum 40 mots
+- Ne conserver que : le nom du projet, les 3 technologies principales, et 
+  le taux de réussite (objectifs atteints vs non atteints)
+- Ne pas inventer d'information absente du texte
+
+Format de sortie : Une seule phrase, sans introduction ni conclusion.
+
+**Réponse obtenue :**
+
+![Réponse prompt C résumé](images/p8_promptC.png)
+
+**Analyse :**
+
+Contrairement au Prompt B, la contrainte de 40 mots est ici plus stricte 
+que la longueur naturelle de la réponse, ce qui force un vrai arbitrage : 
+le LLM condense l'information en une seule phrase dense, respecte le format 
+demandé (pas d'intro/conclusion), et va même jusqu'à reformuler 
+synthétiquement "3 objectifs atteints sur 4" — une agrégation qui n'était 
+pas formulée ainsi dans le texte source, mais qui reste fidèle aux faits 
+(aucune invention). Ce résultat démontre l'intérêt de combiner rôle + 
+contraintes précises + format de sortie : la réponse est directement 
+exploitable et reproductible, contrairement au Prompt A (sans contrainte, 
+résultat dépendant du jugement libre du LLM).
+
+### 8.4 Comparaison des 3 prompts
+
+| Prompt | Contrainte | Longueur obtenue | Effet observé |
+|---|---|---|---|
+| A | Aucune | ~75 mots | Résumé complet mais non reproductible, structure au choix du LLM |
+| B | 150 mots | ~110 mots | Contrainte non restrictive (texte source déjà court), résultat quasi identique à A, légèrement développé |
+| C | 40 mots + rôle + contenu à conserver + format | ~35 mots | Contrainte réellement restrictive, force un arbitrage clair, résultat dense et reproductible |
+
+**Conclusion :** Plus un prompt combine des composants précis (rôle, 
+contraintes de contenu ET de forme, limite de mots réellement stricte par 
+rapport à la longueur naturelle), plus le résultat devient prévisible et 
+exploitable directement, au prix d'une perte de détail assumée et contrôlée 
+plutôt que laissée au hasard du modèle.
