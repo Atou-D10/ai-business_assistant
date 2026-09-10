@@ -96,3 +96,28 @@ l'ajout d'un seul exemple suffit à faire trancher le LLM de façon nette
 pour "négatif", en respectant strictement les 3 classes demandées. 
 L'exemple fourni (qui associe un problème concret à la classe "négatif") 
 semble avoir cadré le format de réponse attendu.
+
+
+### 2.3 Few-shot
+
+**Prompt :**
+Voici des exemples de classification :
+Commentaire : "Livraison en retard, produit endommagé." → négatif
+Commentaire : "Très satisfait, produit conforme et rapide." → positif
+Commentaire : "Produit reçu, rien de particulier à signaler." → neutre
+
+Classe maintenant ce commentaire en positif, négatif ou neutre :
+"Le service est rapide mais l'application plante régulièrement."
+
+**Réponse obtenue :**
+
+![Réponse few-shot](images/p2_fewshot.png)
+
+### Analyse
+
+Le few-shot confirme le résultat du one-shot ("négatif"), avec une 
+justification quasi identique. L'ajout de deux exemples supplémentaires 
+(dont un cas "neutre" et un cas "positif") n'a pas fait varier le résultat 
+ni significativement enrichi le raisonnement par rapport au one-shot, ce 
+qui suggère qu'un seul exemple bien choisi suffisait déjà à cadrer la 
+réponse pour cette tâche de classification simple.
