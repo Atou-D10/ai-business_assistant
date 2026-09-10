@@ -880,3 +880,27 @@ Figma, Stripe, Firebase). C'est un exemple typique d'**hallucination** :
 une réponse cohérente, bien structurée et générique pour ce type de projet, 
 mais qui ne correspond en rien à la réalité du document, faute de contexte 
 fourni.
+
+
+### 7.2 Prompt B — Question EN fournissant le document, sans contrainte
+
+**Prompt :**
+[Document joint : rapport de projet PDF]
+
+Dans mon rapport de projet sur une application de gestion pour un restaurant 
+de sushi, quelles sont les technologies utilisées pour le développement 
+(frontend, backend, base de données, outils) ?
+
+**Réponse obtenue :**
+
+![Réponse prompt B](images/p7_promptB.png)
+
+**Analyse :**
+
+Avec le document fourni, le LLM donne cette fois une réponse **entièrement 
+exacte** : Laravel (backend), Angular (frontend), MySQL (base de données), 
+VSCode/Laragon/GitHub (outils), et même l'architecture trois tiers correcte. 
+Contraste total avec le Prompt A qui inventait une stack plausible mais 
+fausse — la différence illustre concrètement pourquoi le RAG (ou plus 
+simplement, fournir le document) est indispensable dès qu'une question 
+porte sur un contenu spécifique que le LLM ne peut pas connaître nativement.
