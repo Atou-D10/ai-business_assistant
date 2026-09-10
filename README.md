@@ -154,3 +154,21 @@ Le prompt structuré confirme "négatif", avec une justification similaire
 aux deux techniques précédentes, mais cette fois le format de sortie est 
 strictement respecté ("Classe : ..." / "Justification : ..."), ce qui 
 facilite l'exploitation automatique de la réponse par une application.
+
+
+### 2.5 Comparaison des 4 techniques
+
+| Technique | Classe obtenue | Respect du format demandé | Qualité de justification |
+|---|---|---|---|
+| Zero-shot | Hésite entre "neutre/mitigé" et "négatif" | Non (sort du cadre des 3 classes) | Bonne, mais réponse ambiguë |
+| One-shot | Négatif | Oui | Nette et directe |
+| Few-shot | Négatif | Oui | Similaire au one-shot |
+| Prompt structuré | Négatif | Oui, format strict respecté | Nette, format exploitable |
+
+**Conclusion :** le zero-shot est la seule technique à ne pas trancher 
+clairement et à sortir du cadre des classes demandées. Dès qu'un exemple 
+est fourni (one-shot), le LLM se stabilise sur "négatif" et respecte le 
+format — ajouter plus d'exemples (few-shot) n'apporte pas de gain 
+supplémentaire sur ce cas précis. Le prompt structuré est le plus fiable 
+pour un usage en production, car il impose un format de sortie exploitable 
+directement par une application, sans avoir besoin d'exemples.
