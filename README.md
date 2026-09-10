@@ -574,3 +574,50 @@ caractères avec le symbole "€" ("1 200,00 €") plutôt qu'en valeur
 numérique pure — un prompt plus strict pourrait préciser le format 
 attendu (ex : nombre décimal sans symbole monétaire) si l'objectif est 
 de réutiliser ces valeurs dans des calculs automatisés.
+
+
+### 5.5 Rédaction d'email
+
+**Prompt :**
+Rôle : Tu es un rédacteur pour le service client d'une entreprise 
+e-commerce.
+
+Contexte : Une commande client a pris du retard.
+
+Tâche : Rédige un email destiné à ce client.
+
+Objectifs de l'email :
+- Reconnaître le retard
+- Présenter des excuses
+- Expliquer la situation sans inventer de cause précise (le motif exact 
+  du retard n'est pas connu)
+- Proposer une solution (ex : geste commercial, suivi prioritaire)
+
+Ton : professionnel, courtois et rassurant
+
+Contraintes : 150 mots maximum
+
+**Réponse obtenue :**
+
+![Réponse email](images/p5_email.png)
+
+L'email respecte le ton demandé (professionnel, courtois, rassurant), la 
+limite de mots (~145 mots) et propose bien une solution concrète (suivi 
+prioritaire + geste commercial). Point de vigilance : la contrainte 
+demandait explicitement de ne pas inventer de cause précise, or le LLM 
+mentionne "un aléa exceptionnel dans notre chaîne logistique" — une 
+cause qui reste vague, mais qui constitue tout de même une explication 
+non fournie dans le prompt d'origine. Cela illustre une limite : même 
+avec une contrainte explicite de ne pas inventer, le LLM a tendance à 
+combler les vides pour rendre le texte plus naturel.
+
+### Bilan de la Partie 5
+
+Les 5 exercices confirment un principe commun : plus le prompt précise 
+le rôle, le format et les contraintes, plus la réponse est directement 
+exploitable (JSON valides et bien formés pour les tâches 3 et 4). 
+Cependant, la tâche 5 montre une limite récurrente des LLM : même avec 
+une contrainte explicite ("ne pas inventer"), le modèle peut légèrement 
+s'en écarter pour produire un texte plus fluide, ce qui souligne 
+l'importance de toujours relire une sortie générée avant utilisation, 
+même lorsque le prompt est bien construit.
