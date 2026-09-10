@@ -387,3 +387,45 @@ strictement les 5 champs demandés, sans texte parasite avant/après. Les
 valeurs sont cohérentes avec le commentaire : "negatif" et "elevee" sont 
 justifiés par le terme "frustrant" et la nature bloquante du problème 
 (paiement), avec un score de confiance élevé (0.93).
+
+
+### 4.2 Validation des règles de sortie
+
+**Prompt :**
+Rôle : Tu es un système d'analyse de sentiment pour un service client.
+
+Contexte : Voici un commentaire client à analyser :
+"Le service est rapide mais l'application plante régulièrement au moment 
+du paiement, c'est vraiment frustrant."
+
+Tâche : Analyse ce commentaire et retourne le résultat au format JSON.
+
+Règles de validation strictes à respecter impérativement :
+- Le JSON doit être valide (syntaxe correcte, aucune erreur de parsing)
+- Aucune propriété supplémentaire en dehors de : sentiment, categorie, 
+  urgence, probleme, confiance
+- "sentiment" doit valoir exactement "positif", "negatif" ou "neutre" 
+  (aucune autre valeur autorisée)
+- "urgence" doit valoir exactement "faible", "moyenne" ou "elevee"
+- "confiance" doit être un nombre décimal strictement compris entre 0 et 1
+- "categorie" et "probleme" doivent être des chaînes de caractères non vides
+
+Contraintes : Retourne UNIQUEMENT le JSON final, sans texte avant ou après, 
+sans balises de code markdown.
+
+**Réponse obtenue :**
+
+![Réponse JSON validé](images/p4_json_valide.png)
+
+Le JSON produit respecte l'ensemble des règles de validation : syntaxe 
+valide, exactement 5 propriétés (aucune superflue), "sentiment" et 
+"urgence" utilisent des valeurs autorisées, "confiance" (0.85) est bien 
+comprise entre 0 et 1. Le fait d'expliciter les règles de validation 
+directement dans le prompt (plutôt que de les vérifier après coup) 
+garantit une sortie exploitable sans post-traitement supplémentaire.
+
+### Bilan de la Partie 4
+
+Structurer la sortie en JSON, avec des règles de validation explicites 
+dans le prompt, transforme une réponse en texte libre difficilement 
+exploitable en une donnée directement utilisable par une application
