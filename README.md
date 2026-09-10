@@ -539,3 +539,38 @@ correctement que la combinaison "mot de passe refusé + alerte de connexion
 inhabituelle" évoque une possible compromission du compte, et non un simple 
 problème d'accès classique. JSON valide, respectant strictement les 2 
 champs demandés.
+
+
+### 5.4 Extraction d'informations depuis une facture
+
+**Prompt :**
+Rôle : Tu es un système d'extraction de données comptables.
+
+Tâche : Extrais les informations suivantes de la facture ci-dessous : 
+numero_facture, date, client, montant_ht, tva, montant_ttc.
+
+Facture :
+"""
+FACTURE N° FA-2024-0587
+Date : 15/03/2024
+Client : Société Dupont & Fils
+Montant HT : 1 200,00 €
+TVA (20%) : 240,00 €
+Montant TTC : 1 440,00 €
+"""
+
+Format de sortie : Retourne uniquement un JSON valide avec exactement 
+ces 6 champs. Si une information est absente de la facture, utilise 
+la valeur null (pas de texte, pas de chaîne vide).
+
+**Réponse obtenue :**
+
+![Réponse facture](images/p5_facture.png)
+
+Extraction complète et fidèle des 6 champs demandés, aucune information 
+manquante dans cette facture donc aucun `null` nécessaire. Point 
+d'amélioration possible : les montants sont retournés en chaîne de 
+caractères avec le symbole "€" ("1 200,00 €") plutôt qu'en valeur 
+numérique pure — un prompt plus strict pourrait préciser le format 
+attendu (ex : nombre décimal sans symbole monétaire) si l'objectif est 
+de réutiliser ces valeurs dans des calculs automatisés.
