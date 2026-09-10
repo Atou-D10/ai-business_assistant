@@ -205,3 +205,28 @@ Liste uniquement les problèmes mentionnés (sans les prioriser).
 Le LLM identifie 4 problèmes distincts, en séparant même le retard de 
 livraison et l'absence de communication (avis 3) en deux problèmes 
 séparés, ce qui donne une granularité utile pour la suite de l'analyse.
+
+
+#### Étape 2/4 — Évaluer l'importance
+
+**Prompt :**
+Voici une liste de problèmes identifiés dans des avis clients :
+1. Emballage abîmé à la livraison
+2. Retard de livraison de 3 jours par rapport au délai annoncé
+3. Absence de communication concernant ce retard
+4. Plantages fréquents de l'application au moment du paiement
+
+Pour chaque problème, évalue son importance (fréquence d'apparition dans 
+les avis, impact potentiel sur l'expérience client).
+
+**Réponse obtenue :**
+
+![Réponse étape 2 décomposition](images/p3_decomposition_etape2.png)
+
+Le LLM évalue chaque problème selon son impact (critique / élevée / 
+moyenne à élevée / moyenne) et propose une priorité de traitement. Point 
+notable : il signale de lui-même une limite méthodologique (absence de 
+données réelles de fréquence dans les avis fournis) et propose une piste 
+d'amélioration (croiser fréquence réelle et gravité via une matrice 
+impact/fréquence) — une forme de transparence utile sur la fiabilité de 
+son évaluation.
