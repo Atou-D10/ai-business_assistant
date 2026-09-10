@@ -230,3 +230,23 @@ données réelles de fréquence dans les avis fournis) et propose une piste
 d'amélioration (croiser fréquence réelle et gravité via une matrice 
 impact/fréquence) — une forme de transparence utile sur la fiabilité de 
 son évaluation.
+
+#### Étape 3/4 — Prioriser
+
+**Prompt :**
+Voici des problèmes avec leur évaluation d'importance :
+1. Plantages fréquents de l'application au moment du paiement — Critique
+2. Absence de communication concernant le retard — Élevée
+3. Retard de livraison de 3 jours — Moyenne à élevée
+4. Emballage abîmé à la livraison — Moyenne
+
+Classe ces problèmes du plus important au moins important.
+
+**Réponse obtenue :**
+
+![Réponse étape 3 décomposition](images/p3_decomposition_etape3.png)
+
+Le LLM confirme le classement déjà induit par les niveaux d'importance 
+de l'étape précédente (Critique > Élevée > Moyenne à élevée > Moyenne), 
+sans changement d'ordre. Cette étape valide la cohérence du raisonnement 
+plutôt que d'apporter une nouvelle analyse.
