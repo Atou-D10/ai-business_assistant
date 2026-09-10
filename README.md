@@ -727,3 +727,47 @@ données réelles plutôt qu'une description abstraite des colonnes. La
 dernière visualisation (répartition des états par bâtiment) est une 
 proposition pertinente non demandée explicitement, mais utile pour 
 qualifier la fiabilité des données avant toute analyse de consommation.
+
+
+### 6.3 Sélection de modèles
+
+**Prompt :**
+Rôle : Tu es un expert en machine learning.
+
+Contexte : Dataset de capteurs IoT (605 lignes), colonnes : id_mesure, 
+date_heure, id_capteur, batiment, temperature, humidite, pression, 
+consommation, etat.
+
+Voici un échantillon réel des données (5 lignes) :
+id_mesure | date_heure          | id_capteur | batiment | temperature | humidite | pression | consommation | etat
+M0413     | 2026-01-22 04:00:00 | C005       | B002     | 25.46       | 58.06    | 1008.95  | 287.28       | OK
+M0290     | 2026-01-17 01:00:00 | C002       | B001     | 24.00       | 79.73    | 993.39   | 116.20       | OK
+M0077     | 2026-01-08 04:00:00 | C005       | B002     | 25.82       | 54.47    | 1010.32  | 288.50       | OK
+M0079     | 2026-01-08 06:00:00 | C007       | B003     | 28.23       | 69.39    | 1019.62  | 136.65       | OK
+M0183     | 2026-01-12 14:00:00 | C003       | B001     | 20.58       | 53.80    | 1016.58  | 182.62       | OK
+
+Tâche : Propose plusieurs modèles adaptés à la prédiction de la 
+consommation énergétique d'un bâtiment (variable cible : consommation, 
+variable numérique continue).
+
+Format de sortie : pour chaque modèle, indique : le principe, les 
+avantages, les limites, le type de problème, les métriques pertinentes.
+
+**Réponse obtenue :**
+
+![Réponse modèles 1](images/p6_modeles_1.png)
+![Réponse modèles 2](images/p6_modeles_2.png)
+![Réponse modèles 3](images/p6_modeles_3.png)
+
+**Analyse :**
+
+Le LLM identifie correctement le problème comme une régression sur série 
+temporelle, et propose 5 modèles allant du plus simple (régression 
+linéaire) au plus complexe (LSTM), avec pour chacun principe, avantages, 
+limites et métriques adaptées. Point notable de rigueur : le LLM déconseille 
+explicitement le LSTM compte tenu de la taille limitée du dataset (605 
+lignes), plutôt que de recommander par défaut l'approche la plus avancée — 
+signe d'une recommandation contextualisée plutôt que générique. Il rappelle 
+également une bonne pratique essentielle pour ce type de données : un 
+split train/test **temporel** (et non aléatoire) pour éviter la fuite 
+d'information, ainsi qu'une validation croisée adaptée.
