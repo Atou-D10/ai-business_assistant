@@ -172,3 +172,36 @@ format — ajouter plus d'exemples (few-shot) n'apporte pas de gain
 supplémentaire sur ce cas précis. Le prompt structuré est le plus fiable 
 pour un usage en production, car il impose un format de sortie exploitable 
 directement par une application, sans avoir besoin d'exemples.
+
+
+## Partie 3 — Prompt Engineering et raisonnement
+
+### 3.1 Décomposition du prompt (prompt chaining)
+
+**Prompt initial à décomposer :**
+"Analyse ces avis clients et donne-moi les problèmes les plus importants 
+ainsi que les recommandations."
+
+Cette tâche complexe est décomposée en 4 prompts séparés et enchaînés, 
+où la réponse de chaque étape sert d'entrée à la suivante.
+
+#### Étape 1/4 — Identifier les problèmes
+
+**Prompt :**
+Voici des avis clients :
+"""
+1. "Livraison rapide mais l'emballage était abîmé."
+2. "Service client très réactif, problème résolu en 10 minutes."
+3. "J'ai attendu 3 jours de plus que prévu, aucune communication."
+4. "Produit conforme à la description, très satisfait."
+5. "Application qui plante souvent au moment du paiement."
+"""
+Liste uniquement les problèmes mentionnés (sans les prioriser).
+
+**Réponse obtenue :**
+
+![Réponse étape 1 décomposition](images/p3_decomposition_etape1.png)
+
+Le LLM identifie 4 problèmes distincts, en séparant même le retard de 
+livraison et l'absence de communication (avis 3) en deux problèmes 
+séparés, ce qui donne une granularité utile pour la suite de l'analyse.
