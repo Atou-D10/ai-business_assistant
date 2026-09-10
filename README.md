@@ -771,3 +771,37 @@ signe d'une recommandation contextualisée plutôt que générique. Il rappelle
 également une bonne pratique essentielle pour ce type de données : un 
 split train/test **temporel** (et non aléatoire) pour éviter la fuite 
 d'information, ainsi qu'une validation croisée adaptée.
+
+
+### 6.4 Métriques de classification
+
+**Prompt :**
+Rôle : Tu es un expert en machine learning, pédagogue.
+
+Tâche : Explique les métriques de classification suivantes : Accuracy, 
+Precision, Recall, F1-score, ROC-AUC.
+
+Pour chacune, indique :
+- La définition
+- Comment l'interpréter
+- Un exemple concret
+- Dans quel contexte elle est particulièrement utile
+
+**Réponse obtenue :**
+
+![Réponse métriques classification 1](images/p6_metriques_classif_1.png)
+![Réponse métriques classification 2](images/p6_metriques_classif_2.png)
+![Réponse métriques classification 3](images/p6_metriques_classif_3.png)
+
+**Analyse :**
+
+Réponse structurée et pédagogique : chaque métrique est accompagnée de sa 
+formule, d'une interprétation claire et d'un exemple concret différent et 
+bien choisi pour illustrer son usage (fraude bancaire pour l'accuracy, 
+spam pour la precision, dépistage médical pour le recall, modération de 
+contenu pour le F1-score, scoring de crédit pour le ROC-AUC). Le tableau 
+récapitulatif final synthétise utilement la sensibilité de chaque métrique 
+aux faux positifs/négatifs. Point notable : le LLM va au-delà de la 
+demande en mentionnant la PR-AUC comme alternative préférable au ROC-AUC 
+en cas de déséquilibre extrême des classes — une nuance technique 
+pertinente mais non explicitement demandée.
