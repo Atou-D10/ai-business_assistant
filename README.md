@@ -955,3 +955,49 @@ gestion plus rigoureuse de l'incertitude (signalement d'un cas limite plutôt
 que d'inventer ou d'ignorer l'ambiguïté) — ce qui est essentiel dans un 
 contexte métier où la fiabilité et la vérifiabilité de la réponse comptent 
 autant que son exactitude.
+
+
+
+## Partie 8 — Évaluation et optimisation des prompts
+
+### Texte source utilisé (identique pour les 3 prompts)
+
+"""
+Le projet consiste en la création d'une application de gestion pour le 
+restaurant "O Sushi Bar" à Dakar, spécialisé dans la cuisine japonaise. 
+L'application vise à automatiser les principales opérations du restaurant 
+pour améliorer l'efficacité et la satisfaction client. En remplaçant les 
+processus manuels, l'application facilitera la gestion des commandes, des 
+réservations et des stocks, tout en permettant une génération automatisée 
+de rapports d'activité. Le projet a été développé avec Laravel pour le 
+backend, Angular pour le frontend et MySQL pour la base de données, selon 
+une méthodologie agile Scrum. Parmi les objectifs atteints figurent 
+l'optimisation de la gestion des commandes, la gestion des réservations en 
+temps réel et la génération de rapports d'activité détaillés. En revanche, 
+le suivi automatisé des stocks n'a pas été pleinement abouti, en raison de 
+la complexité liée aux ingrédients périssables et à la variabilité des 
+recettes de sushis.
+"""
+
+### 8.1 Prompt A — Résumé basique
+
+**Prompt :**
+Résume ce texte.
+
+Texte :
+"""
+[texte source ci-dessus]
+"""
+
+**Réponse obtenue :**
+
+![Réponse prompt A résumé](images/p8_promptA.png)
+
+**Analyse :**
+
+Le résumé produit est fidèle et couvre les points essentiels (technologies, 
+objectifs atteints/non atteints), en 2 paragraphes. Cependant, aucune 
+contrainte n'ayant été donnée (longueur, format, angle), le résultat dépend 
+entièrement du jugement implicite du LLM sur ce qui est "important" à 
+garder — un autre essai du même prompt pourrait produire une longueur ou 
+une structure différente, sans garantie de reproductibilité.
