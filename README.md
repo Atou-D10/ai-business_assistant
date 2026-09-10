@@ -49,3 +49,26 @@ recommandation) est bien suivi. Point notable : le LLM a spontanément
 ajouté une remarque méthodologique sur la faible représentativité 
 statistique de l'échantillon (5 avis), ce qui n'était pas explicitement 
 demandé mais montre une bonne prise de recul sur la fiabilité de l'analyse.
+
+
+## Partie 2 — Comparer les techniques de prompting
+
+### 2.1 Zero-shot
+
+**Prompt :**
+Classe le commentaire suivant en positif, négatif ou neutre :
+"Le service est rapide mais l'application plante régulièrement."
+
+**Réponse obtenue :**
+
+![Réponse zero-shot](images/p2_zeroshot.png)
+
+
+### Analyse 
+
+Le LLM hésite entre deux classes : il propose d'abord "neutre/mitigé" 
+(catégorie non prévue dans les 3 classes demandées), avant de préciser 
+que s'il doit choisir strictement parmi positif/négatif/neutre, il 
+pencherait pour "négatif". Le prompt zero-shot n'imposant aucune 
+contrainte de format, le LLM se permet de sortir du cadre des 3 classes 
+demandées.
