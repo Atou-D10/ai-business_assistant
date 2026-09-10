@@ -282,3 +282,29 @@ prompt global. Chaque étape s'appuie explicitement sur la précédente,
 ce qui rend le raisonnement traçable et permet de détecter une éventuelle 
 erreur avant qu'elle ne se propage aux étapes suivantes (contrairement à 
 un prompt unique où toute la logique reste "boîte noire").
+
+
+### 3.2 Self-check / vérification
+
+**Prompt 1 — Analyse initiale :**
+Voici un avis client :
+"J'ai commandé un aspirateur robot le 3 mars. Il a mis 10 jours à arriver 
+alors que le site annonçait 3 jours. Une fois reçu, il fonctionnait bien 
+mais s'est arrêté de charger après une semaine. Le service client m'a 
+proposé un remboursement partiel de 20%."
+
+Contraintes : Base-toi uniquement sur les informations présentes dans cet 
+avis, ne rajoute aucune information non mentionnée.
+
+Tâche : Résume cet avis en identifiant le problème principal, la cause 
+probable et l'action déjà entreprise par l'entreprise.
+
+**Réponse obtenue :**
+
+![Réponse self-check étape 1](images/p3_selfcheck_etape1.png)
+
+Le LLM identifie correctement les deux problèmes (retard + panne) et 
+l'action de l'entreprise (remboursement 20%). Point notable : concernant 
+la "cause probable" demandée, il précise honnêtement que l'avis ne 
+mentionne aucune cause, plutôt que d'en inventer une — bon respect de la 
+contrainte de ne pas ajouter d'information non présente dans le texte.
