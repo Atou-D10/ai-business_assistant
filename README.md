@@ -847,3 +847,36 @@ concrètement adaptées à la structure du dataset (doublons fonctionnels,
 choix de modèle selon la taille des données), tandis que les demandes 
 purement pédagogiques (6.4, 6.5) n'ont pas besoin de ce contexte pour 
 produire des explications claires et bien illustrées.
+
+
+## Partie 7 — Prompt Engineering et RAG
+
+### 7.1 Document utilisé
+
+Rapport de projet académique (Licence Professionnelle, ISI) : "Étude et 
+développement d'une application de gestion de restaurant pour un restaurant 
+de sushi" (O Sushi Bar, Dakar).
+
+### 7.2 Prompt A — Question SANS fournir le document
+
+**Prompt :**
+Dans mon rapport de projet sur une application de gestion pour un restaurant 
+de sushi, quelles sont les technologies utilisées pour le développement 
+(frontend, backend, base de données, outils) ?
+
+**Réponse obtenue :**
+
+![Réponse prompt A](images/p7_promptA.png)
+
+**Analyse :**
+
+Le LLM ne dispose d'aucune information sur le rapport réel et **invente une 
+stack technologique entièrement plausible mais fausse** : il propose 
+React/Angular/Vue pour le frontend (alors que le vrai projet utilise 
+uniquement Angular), Node.js/Django/Spring Boot pour le backend (alors que 
+le vrai projet utilise Laravel), MongoDB/PostgreSQL/Redis (alors que seul 
+MySQL est utilisé), et des outils non mentionnés dans le rapport (Docker, 
+Figma, Stripe, Firebase). C'est un exemple typique d'**hallucination** : 
+une réponse cohérente, bien structurée et générique pour ce type de projet, 
+mais qui ne correspond en rien à la réalité du document, faute de contexte 
+fourni.
