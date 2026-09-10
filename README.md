@@ -904,3 +904,54 @@ Contraste total avec le Prompt A qui inventait une stack plausible mais
 fausse — la différence illustre concrètement pourquoi le RAG (ou plus 
 simplement, fournir le document) est indispensable dès qu'une question 
 porte sur un contenu spécifique que le LLM ne peut pas connaître nativement.
+
+
+
+### 7.2 Prompt C — Question EN fournissant le document, AVEC contraintes RAG
+
+**Prompt :**
+[Document joint : rapport de projet PDF]
+
+Dans mon rapport de projet sur une application de gestion pour un restaurant 
+de sushi, quelles sont les technologies utilisées pour le développement 
+(frontend, backend, base de données, outils) ?
+
+Contraintes : Utilise uniquement les informations présentes dans le document 
+fourni. N'invente aucune information absente du document. Si une information 
+demandée n'est pas trouvée dans le document, signale-le explicitement. Cite 
+la section ou le passage du document sur lequel tu bases chaque affirmation.
+
+**Réponse obtenue :**
+
+![Réponse prompt C](images/p7_promptC.png)
+
+**Analyse :**
+
+Les contraintes sont rigoureusement respectées : chaque technologie est 
+associée à sa section précise (ex. section 2.3.1 pour Laravel) et appuyée 
+par une citation exacte du document. Point remarquable : le LLM détecte que 
+"Bootstrap" apparaît dans la webographie finale du rapport, mais refuse de 
+l'affirmer comme technologie confirmée du projet car elle n'est pas décrite 
+dans le corps du texte — il signale cette ambiguïté avec prudence plutôt que 
+de trancher arbitrairement. C'est exactement le comportement recherché par 
+la contrainte "signaler si une information n'est pas trouvée", appliqué ici 
+à un cas limite (information présente mais non confirmée) plutôt qu'à une 
+simple absence totale.
+
+### 7.3 Comparaison des 3 prompts
+
+| Prompt | Document fourni | Contraintes RAG | Résultat |
+|---|---|---|---|
+| A | Non | Non | Stack technologique entièrement inventée (React, Node.js, MongoDB...), aucune correspondance avec le vrai projet |
+| B | Oui | Non | Toutes les technologies correctes (Laravel, Angular, MySQL...), réponse fiable mais sans traçabilité des sources |
+| C | Oui | Oui | Réponse identique à B en fiabilité, mais avec citation systématique des sections/passages, et détection prudente d'un cas ambigu (Bootstrap) |
+
+**Conclusion :** Le Prompt A illustre concrètement le risque d'hallucination 
+d'un LLM interrogé sans contexte documentaire sur un sujet qu'il ne peut pas 
+connaître. Le Prompt B montre que fournir le document suffit à obtenir une 
+réponse fiable. Le Prompt C, avec les contraintes RAG explicites, apporte 
+une valeur supplémentaire : la traçabilité (citations précises) et une 
+gestion plus rigoureuse de l'incertitude (signalement d'un cas limite plutôt 
+que d'inventer ou d'ignorer l'ambiguïté) — ce qui est essentiel dans un 
+contexte métier où la fiabilité et la vérifiabilité de la réponse comptent 
+autant que son exactitude.
