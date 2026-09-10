@@ -250,3 +250,35 @@ Le LLM confirme le classement déjà induit par les niveaux d'importance
 de l'étape précédente (Critique > Élevée > Moyenne à élevée > Moyenne), 
 sans changement d'ordre. Cette étape valide la cohérence du raisonnement 
 plutôt que d'apporter une nouvelle analyse.
+
+#### Étape 4/4 — Recommander
+
+**Prompt :**
+Voici des problèmes clients classés par importance :
+1. Plantages fréquents de l'application au moment du paiement — Critique
+2. Absence de communication concernant le retard — Élevée
+3. Retard de livraison de 3 jours — Moyenne à élevée
+4. Emballage abîmé à la livraison — Moyenne
+
+Pour chaque problème important, propose une recommandation concrète et actionnable.
+
+**Réponse obtenue :**
+
+![Réponse étape 4 décomposition](images/p3_decomposition_etape4.png)
+
+Le LLM propose des recommandations concrètes et actionnables pour chaque 
+problème (outils de monitoring, automatisations, indicateurs chiffrés à 
+suivre), avec un niveau de détail cohérent avec le niveau de gravité 
+(ex : objectif chiffré de taux d'échec pour le problème critique, 
+suggestions plus légères pour l'emballage). Il propose même une 
+prochaine étape (mise en forme en plan d'action), montrant une bonne 
+compréhension de l'usage métier final de cette analyse.
+
+### Bilan de la décomposition (3.1)
+
+Décomposer la tâche en 4 prompts enchaînés permet d'obtenir, à chaque 
+étape, une réponse plus ciblée et plus facile à vérifier qu'un unique 
+prompt global. Chaque étape s'appuie explicitement sur la précédente, 
+ce qui rend le raisonnement traçable et permet de détecter une éventuelle 
+erreur avant qu'elle ne se propage aux étapes suivantes (contrairement à 
+un prompt unique où toute la logique reste "boîte noire").
