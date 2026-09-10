@@ -72,3 +72,27 @@ que s'il doit choisir strictement parmi positif/négatif/neutre, il
 pencherait pour "négatif". Le prompt zero-shot n'imposant aucune 
 contrainte de format, le LLM se permet de sortir du cadre des 3 classes 
 demandées.
+
+
+### 2.2 One-shot
+
+**Prompt :**
+Voici un exemple de classification :
+Commentaire : "Livraison en retard, produit endommagé."
+Classe : négatif
+
+Classe maintenant ce commentaire en positif, négatif ou neutre :
+"Le service est rapide mais l'application plante régulièrement."
+
+**Réponse obtenue :**
+
+![Réponse one-shot](images/p2_oneshot.png)
+
+
+### Analyse
+
+Contrairement au zero-shot qui hésitait entre "neutre/mitigé" et "négatif", 
+l'ajout d'un seul exemple suffit à faire trancher le LLM de façon nette 
+pour "négatif", en respectant strictement les 3 classes demandées. 
+L'exemple fourni (qui associe un problème concret à la classe "négatif") 
+semble avoir cadré le format de réponse attendu.
