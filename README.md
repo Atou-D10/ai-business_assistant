@@ -121,3 +121,36 @@ justification quasi identique. L'ajout de deux exemples supplémentaires
 ni significativement enrichi le raisonnement par rapport au one-shot, ce 
 qui suggère qu'un seul exemple bien choisi suffisait déjà à cadrer la 
 réponse pour cette tâche de classification simple.
+
+
+### 2.4 Prompt structuré
+
+**Prompt :**
+Rôle : Tu es un système de classification de sentiment client.
+
+Contexte : Une entreprise analyse les commentaires clients pour détecter 
+les avis mitigés (contenant à la fois du positif et du négatif).
+
+Tâche : Classe le commentaire suivant en une seule classe parmi : 
+positif, négatif, neutre.
+
+Commentaire : "Le service est rapide mais l'application plante régulièrement."
+
+Contraintes : Si le commentaire contient à la fois un point positif et 
+un point négatif, choisis la classe qui reflète l'impact principal sur 
+l'expérience utilisateur. Justifie brièvement ton choix.
+
+Format de sortie : 
+Classe : [positif/négatif/neutre]
+Justification : [une phrase]
+
+**Réponse obtenue :**
+
+![Réponse prompt structuré](images/p2_structure.png)
+
+### Analyse 
+
+Le prompt structuré confirme "négatif", avec une justification similaire 
+aux deux techniques précédentes, mais cette fois le format de sortie est 
+strictement respecté ("Classe : ..." / "Justification : ..."), ce qui 
+facilite l'exploitation automatique de la réponse par une application.
