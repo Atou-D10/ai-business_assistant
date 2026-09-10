@@ -343,3 +343,47 @@ relecture pourrait manquer (l'ajout du mot "d'utilisation" est subtil mais
 change le sens). Le second prompt agit comme un filtre de qualité qui 
 améliore la fiabilité de la réponse finale, sans intervention humaine 
 entre les deux étapes.
+
+
+## Partie 4 — Sorties structurées
+
+### 4.1 Génération d'une sortie JSON
+
+**Prompt :**
+Rôle : Tu es un système d'analyse de sentiment pour un service client.
+
+Contexte : Voici un commentaire client à analyser :
+"Le service est rapide mais l'application plante régulièrement au moment 
+du paiement, c'est vraiment frustrant."
+
+Tâche : Analyse ce commentaire et retourne le résultat au format JSON avec 
+exactement les champs suivants :
+- sentiment : chaîne de caractères, valeur parmi "positif", "negatif", "neutre"
+- categorie : chaîne de caractères décrivant le sujet principal du commentaire 
+  (ex : "livraison", "paiement", "produit", "service_client")
+- urgence : chaîne de caractères, valeur parmi "faible", "moyenne", "elevee"
+- probleme : chaîne de caractères décrivant le problème principal identifié
+- confiance : nombre décimal entre 0 et 1 représentant ton niveau de confiance 
+  dans cette classification
+
+Contraintes : Retourne UNIQUEMENT le JSON, sans texte avant ou après, sans 
+balises de code.
+
+Format de sortie attendu (exemple) :
+{
+  "sentiment": "negatif",
+  "categorie": "livraison",
+  "urgence": "moyenne",
+  "probleme": "Retard de livraison",
+  "confiance": 0.91
+}
+
+**Réponse obtenue :**
+
+![Réponse JSON brut](images/p4_json_brut.png)
+
+Le LLM retourne un JSON valide et directement exploitable, respectant 
+strictement les 5 champs demandés, sans texte parasite avant/après. Les 
+valeurs sont cohérentes avec le commentaire : "negatif" et "elevee" sont 
+justifiés par le terme "frustrant" et la nature bloquante du problème 
+(paiement), avec un score de confiance élevé (0.93).
